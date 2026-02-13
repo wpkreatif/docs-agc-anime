@@ -4,7 +4,7 @@
 
 | Komponen | Versi Minimum              |
 | -------- | -------------------------- |
-| PHP      | 8.2+                       |
+| PHP      | 8.4                       |
 | Composer | 2.x                        |
 | Node.js  | 18+                        |
 | NPM      | 9+                         |
@@ -12,8 +12,6 @@
 
 ### Ekstensi PHP yang diperlukan:
 
-- `php-sqlite3` (jika pakai SQLite)
-- `php-mysql` / `php-pdo_mysql` (jika pakai MySQL)
 - `php-mbstring`
 - `php-xml`
 - `php-curl`
@@ -23,123 +21,13 @@
 
 ---
 
-## 🚀 Langkah Instalasi
-
-### 1. Extract / Clone Project
+## 🚀 Download File
 
 ```bash
-# Extract file zip
-unzip agc-anime-v1.0.0.zip -d /var/www/agc-anime
-
-# Atau jika dari git
-git clone <repository-url> /var/www/agc-anime
+Silahkan Login ke Member Area di https://akses.toko.im
+Masuk Menu Access
+Download file yang tersedia
 ```
-
-### 2. Masuk ke Direktori Project
-
-```bash
-cd /var/www/agc-anime
-```
-
-### 3. Install Dependency PHP (Composer)
-
-```bash
-composer install --optimize-autoloader --no-dev
-```
-
-### 4. Salin File Environment
-
-```bash
-cp .env.example .env
-```
-
-### 5. Generate Application Key
-
-```bash
-php artisan key:generate
-```
-
-### 6. Buat Database SQLite (Default)
-
-```bash
-touch database/database.sqlite
-```
-
-> **Catatan:** Jika menggunakan MySQL, lewati langkah ini dan konfigurasi database di `.env`.
-
-### 7. Jalankan Migrasi Database
-
-```bash
-php artisan migrate --force
-```
-
-### 8. Install Dependency Frontend (NPM)
-
-```bash
-npm install
-```
-
-### 9. Build Asset Frontend
-
-```bash
-npm run build
-```
-
-### 10. Buat Storage Link
-
-```bash
-php artisan storage:link
-```
-
-### 11. Set Permission (Linux/Mac)
-
-```bash
-chmod -R 775 storage bootstrap/cache
-chown -R www-data:www-data storage bootstrap/cache
-```
-
-### 12. Optimasi untuk Production
-
-```bash
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-```
-
----
-
-## ⚡ Instalasi Cepat (Satu Perintah)
-
-Jika ingin menjalankan semua langkah sekaligus:
-
-```bash
-composer setup
-```
-
-Perintah ini akan otomatis menjalankan:
-
-- `composer install`
-- Copy `.env.example` → `.env`
-- `php artisan key:generate`
-- `php artisan migrate --force`
-- `npm install`
-- `npm run build`
-
----
-
-## 🖥️ Menjalankan di Local / Development
-
-```bash
-# Jalankan semua service sekaligus (server + vite + queue + logs)
-composer dev
-
-# Atau jalankan server saja
-php artisan serve
-```
-
-Akses aplikasi di: `http://localhost:8000`
-
----
 
 ## 🌐 Deploy di Shared Hosting (cPanel/Plesk)
 
@@ -147,20 +35,7 @@ Akses aplikasi di: `http://localhost:8000`
 
 Upload semua file ke folder di luar `public_html`, contoh: `/home/user/agc-anime/`
 
-### 2. Pointing Public
-
-Salin atau symlink isi folder `public/` ke `public_html/`:
-
-```bash
-# Salin isi folder public ke public_html
-cp -r public/* ~/public_html/
-
-# Edit public_html/index.php, ubah path:
-# require __DIR__.'/../vendor/autoload.php' → require __DIR__.'/../agc-anime/vendor/autoload.php'
-# $app = require_once __DIR__.'/../bootstrap/app.php' → $app = require_once __DIR__.'/../agc-anime/bootstrap/app.php'
-```
-
-### 3. Storage Link (Tanpa Terminal)
+### 2. Storage Link (Tanpa Terminal)
 
 Jika tidak ada akses terminal, akses URL berikut di browser:
 
@@ -168,7 +43,7 @@ Jika tidak ada akses terminal, akses URL berikut di browser:
 https://domain-anda.com/setup/storage-link
 ```
 
-### 4. Optimasi (Tanpa Terminal)
+### 3. Optimasi (Tanpa Terminal)
 
 Akses URL berikut di browser:
 
@@ -224,30 +99,12 @@ YANDEX_WEBMASTER=                           # Kode verifikasi Yandex Webmaster
 ### 🎬 Pengaturan API Anime
 
 ```env
-ANIME_API_KEY=ak_xxxxxxxxxxxxxxxxxxxxxxxx   # API key untuk sumber data anime
 ANIME_CACHE_TTL=360                         # Durasi cache dalam menit (default: 6 jam)
 ```
 
 | Variable          | Deskripsi                          | Default       |
 | ----------------- | ---------------------------------- | ------------- |
-| `ANIME_API_KEY`   | API Key untuk mengambil data anime | Wajib diisi   |
 | `ANIME_CACHE_TTL` | Durasi cache data (menit)          | `360` (6 jam) |
-
----
-
-### 🎥 Pengaturan Player
-
-```env
-CUSTOM_PLAYER=https://player.biz.id/proxy   # URL proxy player
-IFRAME_PLAYER=https://player.biz.id/iframe.php  # URL iframe player
-POSTER_PLAYER=https://domain.com/poster.webp # URL gambar poster player
-```
-
-| Variable        | Deskripsi                                 |
-| --------------- | ----------------------------------------- |
-| `CUSTOM_PLAYER` | URL endpoint proxy player untuk streaming |
-| `IFRAME_PLAYER` | URL endpoint iframe player                |
-| `POSTER_PLAYER` | URL gambar poster/thumbnail pada player   |
 
 ---
 
@@ -375,17 +232,6 @@ DB_CONNECTION=sqlite
 ```
 
 Tidak perlu konfigurasi tambahan. File database otomatis di `database/database.sqlite`.
-
-#### MySQL (Opsional)
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=nama_database
-DB_USERNAME=root
-DB_PASSWORD=password_anda
-```
 
 ---
 
