@@ -282,11 +282,47 @@ https://domain-anda.com/setup/optimize
 
 ## 🔄 Generate Sitemap
 
+### Manual (via Terminal)
+
 ```bash
 php artisan sitemap:generate
 ```
 
-Atau akses URL di browser:
+Output sitemap akan disimpan ke `public/sitemap.xml` dan cache di-update otomatis.
+
+### Otomatis via Cron Job (Direkomendasikan)
+
+Sitemap sudah di-schedule otomatis setiap hari **jam 03:00 pagi**. Cukup tambahkan **1 baris cron** di server:
+
+#### Setup di Linux/VPS:
+
+```bash
+# Buka crontab editor
+crontab -e
+
+# Tambahkan baris ini (sesuaikan path project):
+* * * * * cd /var/www/agc-anime && php artisan schedule:run >> /dev/null 2>&1
+```
+
+#### Setup di cPanel:
+
+1. Login ke **cPanel** → **Cron Jobs**
+2. Set interval ke **Every Minute** (`* * * * *`)
+3. Masukkan command:
+
+```
+cd /home/username/agc-anime && php artisan schedule:run >> /dev/null 2>&1
+```
+
+> **Catatan:** Sesuaikan `/home/username/agc-anime` dengan path project Anda di server.
+
+#### Cek Log Sitemap:
+
+```bash
+cat storage/logs/sitemap.log
+```
+
+### Akses Sitemap di Browser
 
 ```
 https://domain-anda.com/sitemap.xml
